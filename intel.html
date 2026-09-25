@@ -12,7 +12,8 @@
         .app-title { font-size: 22px; font-weight: 900; text-transform: uppercase; margin: 0 0 5px 0; }
         .score-row { display: flex; justify-content: space-around; font-family: sans-serif; font-weight: 800; font-size: 13px; color: #1565C0; }
         .card-title { font-size: 14px; font-weight: 800; color: #B71C1C; text-transform: uppercase; margin-bottom: 6px; text-align: center; }
-        .card-text { font-size: 14px; color: #212121; margin: 0; white-space: pre-line; font-weight: 500; }
+        .card-text { font-size: 14px; color: #212121; margin: 0; white-space: pre-line; font-weight: 500; display: none; }
+        .card-text.active-text { display: block; }
         .viewport { height: 230px; position: relative; margin-bottom: 12px; border-radius: 24px; overflow: hidden; background: linear-gradient(180deg, #B3E5FC 0%, #E1F5FE 100%); border: 3px solid #90CAF9; display: flex; flex-direction: column; justify-content: space-between; padding: 12px; box-sizing: border-box; }
         .mystery-banner { position: absolute; top: 12px; left: 12px; background: rgba(13, 71, 161, 0.85); color: #FFF; font-family: sans-serif; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; }
         .large-node { font-size: 38px; z-index: 10; margin-top: 10px; }
@@ -38,7 +39,15 @@
         </div>
         <div class="card">
             <div id="p-title" class="card-title">The Sign of the Cross</div>
-            <p id="p-text" class="card-text">In the name of the Father, and of the Son, and of the Holy Spirit. Amen.</p>
+            
+            <!-- Static HTML data nodes hold the long text completely inside the box layout -->
+            <p id="t-0" class="card-text active-text">In the name of the Father, and of the Son, and of the Holy Spirit. Amen.</p>
+            <p id="t-1" class="card-text">I believe in God, the Father Almighty, Creator of heaven and earth, and in Jesus Christ, His only Son, our Lord, who was conceived by the Holy Spirit, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, died and was buried; He descended into hell; on the third day He rose again from the dead; He ascended into heaven, and is seated at the right hand of God the Father Almighty; from there He will come to judge the living and the dead.\n\nI believe in the Holy Spirit, the holy catholic Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and life everlasting. Amen.</p>
+            <p id="t-2" class="card-text">Our Father, Who art in heaven, hallowed be Thy name. Thy kingdom come. Thy will be done on earth as it is in heaven. Give us this day our daily bread and forgive us our trespasses as we forgive those who trespass against us. And lead us not into temptation, but deliver us from evil. Amen.</p>
+            <p id="t-3" class="card-text">Hail Mary, full of grace, the Lord is with thee. Blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.</p>
+            <p id="t-4" class="card-text">Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen.\n\nFatima Prayer: O my Jesus, forgive us our sins, save us from the fires of hell. Lead all souls to heaven, especially those in most need of Thy mercy. Amen.</p>
+            <p id="t-5" class="card-text">Hail, Holy Queen, Mother of Mercy, our life, our sweetness and our hope. To thee do we cry, poor banished children of Eve. To thee do we send up our sighs, mourning and weeping in this valley of tears. Turn then, most gracious advocate, thine eyes of mercy toward us, and after this our exile, show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary! Pray for us, O Holy Mother of God, that we may be made worthy of the promises of Christ. Amen.</p>
+            <p id="t-6" class="card-text">O God, whose only begotten Son, by His life, death, and resurrection, has purchased for us the rewards of eternal life, grant, we beseech Thee, that meditating upon these mysteries of the Most Holy Rosary of the Blessed Virgin Mary, we may imitate what they contain and obtain what they promise, through the same Christ our Lord. Amen.</p>
         </div>
         <div class="viewport" id="viewport">
             <div id="mystery-node" class="mystery-banner">Opening Focus</div>
@@ -50,46 +59,39 @@
     </div>
     <script>
         var step = 0; const MAX = 61;
-        var p1 = "Our Father, Who art in heaven, hallowed be Thy name. Thy kingdom come. Thy will be done on earth as it is in heaven. Give us this day our daily bread and forgive us our trespasses as we forgive those who trespass against us. And lead us not into temptation, but deliver us from evil. Amen.";
-        var p2 = "Hail Mary, full of grace, the Lord is with thee. Blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.";
-        var p3 = "Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen.\n\nFatima Prayer: O my Jesus, forgive us our sins, save us from the fires of hell. Lead all souls to heaven, especially those in most need of Thy mercy. Amen.";
-        var p4 = "I believe in God, the Father Almighty, Creator of heaven and earth, and in Jesus Christ, His only Son, our Lord, who was conceived by the Holy Spirit, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, died and was buried; He descended into hell; on the third day He rose again from the dead; He ascended into heaven, and is seated at the right hand of God the Father Almighty; from there He will come to judge the living and the dead.\n\nI believe in the Holy Spirit, the holy catholic Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and life everlasting. Amen.";
-        var p5 = "Hail, Holy Queen, Mother of Mercy, our life, our sweetness and our hope. To thee do we cry, poor banished children of Eve. To thee do we send up our sighs, mourning and weeping in this valley of tears. Turn then, most gracious advocate, thine eyes of mercy toward us, and after this our exile, show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary! Pray for us, O Holy Mother of God, that we may be made worthy of the promises of Christ. Amen.";
-        var p6 = "O God, whose only begotten Son, by His life, death, and resurrection, has purchased for us the rewards of eternal life, grant, we beseech Thee, that meditating upon these mysteries of the Most Holy Rosary of the Blessed Virgin Mary, we may imitate what they contain and obtain what they promise, through the same Christ our Lord. Amen.";
+        var grp = document.getElementById('matrix');
         var mysteries = ["1st Mystery: Agony in the Garden", "2nd Mystery: Scourging at the Pillar", "3rd Mystery: Crowning with Thorns", "4th Mystery: Carrying of the Cross", "5th Mystery: The Crucifixion"];
 
-        function getData(s) {
-            if (s === 0) return { b: "👑", s: "Opening Prayers", t: "The Sign of the Cross", p: "In the name of the Father, and of the Son, and of the Holy Spirit. Amen.", lg: true, m: "Opening Focus" };
-            if (s === 1) return { b: "📀", s: "Opening Prayers", t: "The Apostles' Creed", p: p4, lg: true, m: "Opening Focus" };
-            if (s === 2) return { b: "👑", s: "Opening Prayers", t: "The Our Father", p: p1, lg: true, m: "For the Pope's Intentions" };
-            if (s === 3) return { b: "📀", s: "Opening Prayers", t: "Hail Mary (Faith)", p: p2, lg: false, m: "Increase of Faith" };
-            if (s === 4) return { b: "📀", s: "Opening Prayers", t: "Hail Mary (Hope)", p: p2, lg: false, m: "Increase of Hope" };
-            if (s === 5) return { b: "📀", s: "Opening Prayers", t: "Hail Mary (Charity)", p: p2, lg: false, m: "Increase of Charity" };
-            if (s === 6) return { b: "✨", s: "Opening Prayers", t: "Glory Be & Fatima Prayer", p: p3, lg: true, m: "Opening Focus" };
-            if (s === 57) return { b: "✨", s: "Closing Prayers", t: "Glory Be & Fatima Prayer", p: p3, lg: true, m: "Final Prayers" };
-            if (s === 58) return { b: "👑", s: "Closing Prayers", t: "Hail, Holy Queen", p: p5, lg: true, m: "Offering Roses to Mary" };
-            if (s === 59) return { b: "💝", s: "Closing Prayers", t: "Concluding Rosary Prayer", p: p6, lg: true, m: "Final Offering" };
-            if (s === 60) return { b: "👑", s: "Closing Prayers", t: "The Sign of the Cross", p: "In the name of the Father, and of the Son, and of the Holy Spirit. Amen.", lg: true, m: "Concluded" };
-            var adj = s - 7; var dec = Math.floor(adj / 10); var rem = adj % 10;
-            if (rem === 0) return { b: "👑", s: "Decade " + (dec + 1), t: "The Our Father", p: p1, lg: true, m: mysteries[dec] };
-            return { b: "📀", s: "Decade " + (dec + 1), t: "Hail Mary - Bead " + rem, p: p2, lg: false, m: mysteries[dec] };
-        }
-        function drawMatrix() {
-            var mx = document.getElementById('matrix'); mx.innerHTML = '';
-            var adj = step - 7; var rem = (step >= 7 && step < 57) ? (adj % 10) : -1;
-            if (step >= 3 && step <= 5) { rem = step - 2; }
-            for (var i = 1; i <= 10; i++) {
-                var cell = document.createElement('div'); cell.className = 'bead';
-                if ((step >= 3 && step <= 5 && i <= rem) || (rem !== 0 && i <= rem && step >= 7 && step < 57)) {
-                    cell.innerHTML = '🌹'; cell.className = 'bead bloom';
-                } else {
-                    cell.innerHTML = '📀';
-                }
-                mx.appendChild(cell);
+        function updateDisplay() {
+            var titles = ["The Sign of the Cross", "The Apostles' Creed", "The Our Father", "Hail Mary (Faith)", "Hail Mary (Hope)", "Hail Mary (Charity)", "Glory Be & Fatima Prayer"];
+            var textIdx = 0; var section = "Opening Prayers"; var banner = "Opening Focus"; var largeBead = "👑";
+
+            if (step <= 6) {
+                textIdx = step === 0 ? 0 : (step === 1 ? 1 : (step === 2 ? 2 : (step === 6 ? 4 : 3)));
+                document.getElementById('p-title').innerText = titles[step];
+                if (step === 2) banner = "For the Pope's Intentions";
+                if (step === 3) banner = "Increase of Faith";
+                if (step === 4) banner = "Increase of Hope";
+                if (step === 5) banner = "Increase of Charity";
+                largeBead = (step === 0 || step === 2) ? "👑" : (step === 6 ? "✨" : "📀");
+            } else if (step === 57) {
+                textIdx = 4; document.getElementById('p-title').innerText = "Glory Be & Fatima Prayer"; section = "Closing Prayers"; banner = "Final Prayers"; largeBead = "✨";
+            } else if (step === 58) {
+                textIdx = 5; document.getElementById('p-title').innerText = "Hail, Holy Queen"; section = "Closing Prayers"; banner = "Offering Roses to Mary"; largeBead = "👵👑"; offerRoses();
+            } else if (step === 59) {
+                textIdx = 6; document.getElementById('p-title').innerText = "Concluding Rosary Prayer"; section = "Closing Prayers"; banner = "Final Offering"; largeBead = "💝";
+            } else if (step === 60) {
+                textIdx = 0; document.getElementById('p-title').innerText = "The Sign of the Cross"; section = "Closing Prayers"; banner = "Concluded"; largeBead = "👑";
+            } else {
+                var adj = step - 7; var dec = Math.floor(adj / 10); var rem = adj % 10;
+                section = "Decade " + (dec + 1); banner = mysteries[dec];
+                if (rem === 0) { textIdx = 2; document.getElementById('p-title').innerText = "The Our Father"; largeBead = "👑"; }
+                else { textIdx = 3; document.getElementById('p-title').innerText = "Hail Mary - Bead " + rem; largeBead = "📀"; }
             }
-        }
-        function offerRoses() {
-            var v = document.getElementById('viewport');
-            for (var i = 0; i < 15; i++) {
-                setTimeout((function(x) { return function() {
-                    var p = document.createElement('div'); p.className = 'gift-rose'; p.innerHTML = '🌹';
+
+            document.getElementById('b-lbl').innerText = "Bead Tracker: " + (step + 1) + " / " + MAX;
+            document.getElementById('s-lbl').innerText = section;
+            document.getElementById('mystery-node').innerText = banner;
+            document.getElementById('l-node').innerText = largeBead;
+
+            var allTexts = document.getElementsByClassName('card-text');
