@@ -20,7 +20,7 @@
         .bead { font-size: 24px; width: 30px; height: 34px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
         .bloom { animation: roseBloom 0.5s ease-out forwards; }
         @keyframes roseBloom { 0% { transform: scale(0.4); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 8px #FF5252); } }
-        .gift-rose { position: absolute; font-size: 28px; animation: floatToMary 2.5s ease-in-out forwards; z-index: 25; }
+        .gift-rose { position: absolute; font-size: 28px; animation: floatToMary 2.5s ease-in-out forwards; z-index: 25; bottom: 15px; }
         @keyframes floatToMary { 0% { bottom: 15px; left: var(--start-x); transform: scale(0.5); opacity: 1; } 100% { bottom: 130px; left: 50%; transform: translate(-50%, -50%) scale(1.2); opacity: 0; } }
         .trust { font-family: sans-serif; font-weight: 900; font-size: 18px; text-transform: uppercase; margin: 5px 0 15px 0; color: #1565C0; opacity: 0.5; }
         .glow { opacity: 1; color: #0D47A1; text-shadow: 0 0 10px #B3E5FC; }
@@ -95,24 +95,3 @@
             for (var i = 0; i < 15; i++) {
                 setTimeout((function(x) { return function() {
                     var p = document.createElement('div'); p.className = 'gift-rose'; p.innerHTML = '🌹';
-                    p.style.setProperty('--start-x', (Math.random() * 80 + 10) + '%'); v.appendChild(p);
-setTimeout(function() { p.remove(); }, 2500);
-}; })(i), i * 150);
-}
-}
-function prayStep() {
-if (step < MAX - 1) {
-step++; var n = getData(step);
-document.getElementById('b-lbl').innerText = "Bead Tracker: " + (step + 1) + " / " + MAX;
-document.getElementById('s-lbl').innerText = n.s; document.getElementById('p-title').innerText = n.t; document.getElementById('p-text').innerText = n.p;
-var lNode = document.getElementById('l-node');
-if (step === 58) { lNode.innerHTML = '👵👑'; offerRoses(); } else { lNode.innerText = n.lg ? n.b : "✨"; }
-document.getElementById('mystery-node').innerText = n.m; drawMatrix();
-if (step > 1) document.getElementById('t-node').className = "trust glow";
-if (step === MAX - 1) {
-var b = document.getElementById('act-btn'); b.disabled = true; b.innerText = "Rosary Completed ✨"; b.style.background = "#2E7D32";
-}
-}
-}
-drawMatrix();
-
