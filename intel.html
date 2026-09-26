@@ -95,3 +95,24 @@
             for (var i = 0; i < 15; i++) {
                 setTimeout((function(x) { return function() {
                     var p = document.createElement('div'); p.className = 'gift-rose'; p.innerHTML = '🌹';
+                    p.style.setProperty('--start-x', (Math.random() * 80 + 10) + '%'); v.appendChild(p);
+setTimeout(function() { p.remove(); }, 2500);
+}; })(i), i * 150);
+}
+}
+function prayStep() {
+if (step < MAX - 1) {
+step++; var n = getData(step);
+document.getElementById('b-lbl').innerText = "Bead Tracker: " + (step + 1) + " / " + MAX;
+document.getElementById('s-lbl').innerText = n.s; document.getElementById('p-title').innerText = n.t; document.getElementById('p-text').innerText = n.p;
+var lNode = document.getElementById('l-node');
+if (step === 58) { lNode.innerHTML = '👵👑'; offerRoses(); } else { lNode.innerText = n.lg ? n.b : "✨"; }
+document.getElementById('mystery-node').innerText = n.m; drawMatrix();
+if (step > 1) document.getElementById('t-node').className = "trust glow";
+if (step === MAX - 1) {
+var b = document.getElementById('act-btn'); b.disabled = true; b.innerText = "Rosary Completed ✨"; b.style.background = "#2E7D32";
+}
+}
+}
+drawMatrix();
+
